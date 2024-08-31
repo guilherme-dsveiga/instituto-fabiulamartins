@@ -1,0 +1,25 @@
+---
+const { title, description, icon } = Astro.props;
+---
+
+<div class="flex flex-col">
+  <div
+    class="w-full relative overflow-hidden rounded-sm md:rounded-md lg:rounded-lg"
+  >
+    <div class="flex items-center justify-center">
+      <div
+        class="flex-shrink-0 relative overflow-hidden aspect-w-1 aspect-h-1 rounded-sm md:rounded-md lg:rounded-lg w-80"
+      >
+        <img src={`assets/${icon}-icon.png`} />
+      </div>
+    </div>
+  </div>
+  <div
+    class="flex flex-col gap-4 text-left items-center lg:items-start py-6 font-mulish"
+  >
+    <p class="text-3xl">{title}</p>
+    <p class="text-lg">
+      {description}
+    </p>
+  </div>
+</div>

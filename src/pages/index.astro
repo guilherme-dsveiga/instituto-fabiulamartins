@@ -1,0 +1,199 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Carousel from "../components/carousel.astro";
+import IconCard from "../components/icon-card.astro";
+import {
+  slides,
+  iconCards,
+  introParagraphs,
+  harmonizeImages,
+  receptionImages,
+} from "../data/index.astro";
+import ImageCard from "../components/image-card.astro";
+import Room from "../components/room.astro";
+import GaleryCarousel from "../components/galery-carousel.astro";
+---
+
+<Layout title="Instituto Fabiula Martins">
+  <header
+    class="bg-neutral-900 text-neutral-50 fixed top-0 left-0 right-0 h-64 z-50"
+  >
+    <div class="flex justify-between items-center container mx-auto p-6">
+      <div>
+        <img class="h-[200px] w-[200px] object-contain" src="assets/logo.png" />
+      </div>
+      <div>
+        <button class="px-4 py-[6px] rounded-lg border-2 border-neutral-50"
+          >Entre em contato</button
+        >
+      </div>
+    </div>
+  </header>
+  <main class="mt-64">
+    <section class="relative">
+      <div class="absolute inset-0 z-10 pointer-events-none bg-white">
+        <img
+          src="/assets/person-hero.png"
+          class="w-full h-full object-cover bg-center opacity-40"
+          style="object-position: 45% 15%"
+        />
+      </div>
+      <div
+        class="relative z-10 lg:pt-48 lg:pb-72 px-5 md:px-6 container mx-auto transition-all duration-300 py-20"
+      >
+        <div
+          class="relative z-10 w-full h-full flex gap-10 lg:gap-20 transition-all duration-300 flex-col lg:flex-row items-center"
+        >
+          <div
+            class="flex-1 flex flex-col w-fulll max-w-3xl items-start text-neutral-900"
+          >
+            <h1
+              class="mb-6 break-word transition-all duration-300 text-middle text-4xl lg:text-7xl font-merriweather"
+            >
+              Sorria com Confiança
+            </h1>
+            <p class="text-lg lg:text-2xl">
+              Transforme seu sorriso e realce sua beleza natural com o melhor
+              cuidado de Santos
+            </p>
+            <button
+              class="mt-6 px-4 py-2 rounded-lg border-2 border-neutral-900 text-xl"
+              >Agende já</button
+            >
+          </div>
+          <div
+            class="flex-1 flex w-full lg:max-w-1/2 h-full transition-all duration-300 justify-center lg:justify-start"
+          >
+            <div
+              class="flex-shrink-0 relative mx-auto w-full h-full transition-all duration-300 pb-[calc(9/16*100%)]"
+            >
+              <div class="absolute inset-0 z-10 pointer-events-none">
+                <img
+                  class="transition-all duration-300 rounded-2xl md:rounded-3xl lg:rounded-4xl w-full h-full object-cover"
+                  src="/assets/person-on-desk.jpg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="relative bg-neutral-900 text-neutral-50">
+      <Room title="Sala Harmonização" picturesArray={harmonizeImages} />
+    </section>
+    <section
+      class="flex flex-none flex-shrink-0 relative break-word items-center bg-neutral-700 text-white"
+    >
+      <div class="absolute inset-0 z-10 pointer-events-none">
+        <img
+          src="/assets/botox-hero.webp"
+          class="w-full h-full object-cover bg-center opacity-45"
+          style="object-position: 50% 10%;"
+        />
+      </div>
+      <div
+        class="relative z-10 container mx-auto pt-16 lg:pt-32 pb-16 lg:pb-32 text-lg"
+      >
+        <div class="max-w-5xl text-left ml-0 mr-auto">
+          {introParagraphs.map((paragraph) => <p class="mb-5">{paragraph}</p>)}
+        </div>
+        <button
+          class="px-4 py-3 rounded-lg border-2 border-neutral-50 text-neutral-50 text-xl"
+          >Agende já</button
+        >
+      </div>
+    </section>
+    <section class="relative my-20">
+      <Room title="Recepção" picturesArray={receptionImages} />
+    </section>
+    <section class="relative">
+      <div class="relative flex break-word flex-col lg:flex-row min-h-screen">
+        <div class="flex-1 relative text-white">
+          <div class="absolute inset-0 z-10 pointer-events-none">
+            <div class="absolute inset-0 z-10 bg-neutral-900"></div>
+          </div>
+          <div
+            class="relative z-10 container flex flex-col h-full mx-auto px-5 md:px-6 lg:px-20 justify-center"
+          >
+            <div>
+              <div
+                class="flex flex-col w-full max-w-3xl lg:mr-0 lg:ml-auto pt-8 lg:pt-12 pb-12 lg:pb-20"
+              >
+                <div>
+                  <h2
+                    style="white-space:pre-line"
+                    class="text-5xl font-merriweather mb-7"
+                  >
+                    Cuide da sua saúde bucal no Instituto Fabíula Martins
+                  </h2>
+                  <p class="text-lg mb-2">
+                    Localizado em Santos, SP, o Instituto Fabíula Martins é
+                    especializado em serviços odontológicos de qualidade. Nossa
+                    equipe de profissionais experientes está pronta para cuidar
+                    do seu sorriso e garantir sua saúde bucal. Confie no
+                    Instituto Fabíula Martins para todas as suas necessidades
+                    odontológicas.
+                  </p>
+                  <button
+                    class="mt-6 px-4 py-2 rounded-lg border-2 border-white text-xl"
+                    >Agende já</button
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:flex-1 relative">
+          <div
+            class="flex-shrink-0 relative w-full h-full mx-auto pb-[calc(9/16*100%)]"
+          >
+            <div class="absolute inset-0 z-10 pointer-events-none">
+              <img
+                class="transition-all duration-300 w-full h-full object-cover"
+                src="/assets/person-smile.webp"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="relative bg-neutral-900 text-neutral-50 pt-2">
+      <Room title="Sala odontológica" picturesArray={receptionImages} />
+    </section>
+    <section class="bg-neutral-800">
+      <div
+        class="relative z-10 container mx-auto pt-16 lg:pt-32 pb-8 lg:pb-12 text-white"
+      >
+        <h2 class="font-merriweather text-5xl mb-6">Meus serviços</h2>
+        <div class="flex flex-col gap-10">
+          <div
+            class="flex flex-col lg:flex-row relative justify-center lg:justify-start gap-12"
+          >
+            {iconCards.slice(0, 4).map((card) => <IconCard {...card} />)}
+          </div>
+          <div
+            class="flex flex-col lg:flex-row relative justify-center lg:justify-start gap-10"
+          >
+            {iconCards.slice(4, 8).map((card) => <IconCard {...card} />)}
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="relative mt-12">
+      <Room picturesArray={receptionImages} />
+    </section>
+    <section class="mt-12 mb-20">
+      <div class="bg-neutral-800 pt-12 pb-16">
+        <div class="w-full bg-neutral-800 container mx-auto">
+          <Carousel slides={slides} />
+        </div>
+      </div>
+    </section>
+    <section class="relative my-20">
+      Antes e Depois
+      <div>
+        <GaleryCarousel />
+      </div>
+    </section>
+  </main>
+</Layout>

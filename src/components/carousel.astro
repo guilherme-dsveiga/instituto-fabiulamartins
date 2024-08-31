@@ -1,0 +1,145 @@
+---
+const { slides } = Astro.props;
+---
+
+<div class="bg-neutral-800">
+  <div class="w-full bg-neutral-800 container mx-auto">
+    <div
+      x-data=`{
+      slides: ${JSON.stringify(slides)},
+      currentSlideIndex: 1,
+      transitioning: false,
+      direction: 'next',
+      previous() {
+        if (!this.transitioning) {
+          this.direction = 'prev';
+          this.transitioning = true;
+          if (this.currentSlideIndex > 1) {
+            this.currentSlideIndex = this.currentSlideIndex - 1;
+          } else {
+            this.currentSlideIndex = this.slides.length;
+          }
+          setTimeout(() => { this.transitioning = false }, 500);
+        }
+      },
+      next() {
+        if (!this.transitioning) {
+          this.direction = 'next';
+          this.transitioning = true;
+          if (this.currentSlideIndex < this.slides.length) {
+            this.currentSlideIndex = this.currentSlideIndex + 1;
+          } else {
+            this.currentSlideIndex = 1;
+          }
+          setTimeout(() => { this.transitioning = false }, 500);
+        }
+      }
+    }`
+      class="relative w-full overflow-hidden bg-neutral-800"
+    >
+      <!-- Previous Button -->
+      <button
+        type="button"
+        class="absolute left-10 top-1/2 z-20 flex rounded-full -translate-y-1/2 items-center justify-center p-2 text-neutral-600 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black active:outline-offset-0 dark:text-neutral-300 dark:focus-visible:outline-white"
+        aria-label="previous slide"
+        x-on:click="previous()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          class="w-6 lg:w-12 h-6 lg:h-12 -ml-4 md:ml-0"
+          aria-hidden="true"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="m15 19-7-7 7-7"></path></svg
+        >
+      </button>
+
+      <!-- Next Button -->
+      <button
+        type="button"
+        class="absolute right-10 top-1/2 z-20 flex -translate-y-1/2 items-center justify-center p-2 text-neutral-600 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black active:outline-offset-0 dark:text-neutral-300 dark:focus-visible:outline-white"
+        aria-label="next slide"
+        x-on:click="next()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          class="w-6 lg:w-12 h-6 lg:h-12 -mr-4 md:mr-0"
+          aria-hidden="true"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="m9 5 7 7-7 7"></path></svg
+        >
+      </button>
+
+      <!-- Slides -->
+      <div
+        class="relative min-h-[50svh] w-full overflow-hidden font-merriweather"
+      >
+        <template x-for="(slide, index) in slides" :key="index">
+          <div
+            x-show="currentSlideIndex == index + 1"
+            x-transition:enter="transition ease-out duration-500 transform"
+            x-transition:enter-start="translate-x-[-100%]"
+            x-transition:enter-end="translate-x-0"
+            x-transition:leave="transition ease-in duration-500 transform"
+            x-transition:leave-start="translate-x-0"
+            x-transition:leave-end="translate-x-[100%]"
+            class="absolute inset-0 w-full h-full"
+          >
+            <!-- Title And Description -->
+            <div
+              class="lg:px-32 lg:py-14 absolute inset-0 z-10 flex flex-col items-start justify-center gap-4 px-16 py-12 text-left"
+            >
+              <h3
+                class="w-full lg:max-w-6xl text-balance text-3xl lg:text-[32px] leading-10 text-white"
+                x-text="slide.quote"
+                x-bind:aria-describedby="'slide' + (index + 1) + 'Quote'"
+              >
+              </h3>
+              <p
+                class="lg:w-1/2 w-full text-pretty text-2xl text-white font-mulish"
+                x-text="slide.author"
+                x-bind:id="'slide' + (index + 1) + 'Author'"
+              >
+              </p>
+            </div>
+
+            <div
+              class="absolute w-full h-full inset-0 bg-neutral-800 text-neutral-600 dark:text-neutral-300"
+            >
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <!-- Indicators -->
+      <div
+        class="absolute rounded-md bottom-10 md:bottom-5 left-32 z-20 flex gap-4 lg:gap-5 px-1.5 py-1 md:px-2 items-center"
+        role="group"
+        aria-label="slides"
+      >
+        <template x-for="(slide, index) in slides">
+          <button
+            class="size-[10px] cursor-pointer rounded-full transition"
+            x-on:click="currentSlideIndex = index + 1"
+            x-bind:class="[currentSlideIndex === index + 1 ? 'bg-neutral-950 ring-4 ring-gray-200' : 'bg-neutral-300/50']"
+            x-bind:aria-label="'slide ' + (index + 1)"></button>
+        </template>
+      </div>
+    </div>
+  </div>
+</div>
