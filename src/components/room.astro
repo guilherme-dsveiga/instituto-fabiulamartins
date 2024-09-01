@@ -1,7 +1,7 @@
 ---
-import ImageCard from "./image-card.astro";
+import ImageCard from "./image-card.jsx";
 
-const { title, picturesArray, variant = "dark" } = Astro.props;
+const { title, picturesArray, prefix, variant = "dark" } = Astro.props;
 ---
 
 {
@@ -12,5 +12,15 @@ const { title, picturesArray, variant = "dark" } = Astro.props;
   )
 }
 <div class="grid grid-cols-1 lg:grid-cols-3">
-  {picturesArray.map((image) => <ImageCard src={image} />)}
+  {
+    picturesArray.map((image, index) => (
+      <ImageCard
+        src={image}
+        index={index}
+        images={picturesArray}
+        prefix={prefix}
+        client:only="react"
+      />
+    ))
+  }
 </div>

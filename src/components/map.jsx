@@ -33,7 +33,7 @@ function Map() {
         url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
       />
       <Marker position={[lat, lng]} icon={icon}></Marker>
-      <div className="absolute inset-0 z-[99999999]">
+      <div className="absolute inset-0 z-[999]">
         <div className="relative z-10 container mx-auto py-12 lg:py-14 xl:py-20">
           <div className="flex flex-row w-full md:flex-row-reverse">
             <div className="relative z-10 w-full md:w-1/2 xl:w-2/5 flex flex-col gap-6 p-6 lg:p-10 shadow overflow-hidden rounded-2xl md:rounded-3xl lg:rounded-4xl bg-white">

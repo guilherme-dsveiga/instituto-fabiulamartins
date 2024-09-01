@@ -7,8 +7,9 @@ import {
   introParagraphs,
   harmonizeImages,
   receptionImages,
+  beforeAfterImages,
 } from "../data/index.astro";
-import ImageCard from "../components/image-card.astro";
+import ImageCard from "../components/image-card.jsx";
 import Room from "../components/room.astro";
 import "../styles/index.css";
 import GalleryCarousel from "../components/gallery-carousel.jsx";
@@ -16,12 +17,11 @@ import TestimonialCarousel from "../components/testimonial-carousel.jsx";
 import Map from "../components/map";
 
 const dayOfTheWeek = new Date().getDay();
-console.log(dayOfTheWeek);
 ---
 
 <Layout title="Instituto Fabiula Martins">
   <header
-    class="bg-neutral-900 text-neutral-50 fixed top-0 left-0 right-0 lg:h-64 h-40 z-50"
+    class="bg-neutral-900 text-neutral-50 fixed top-0 left-0 right-0 lg:h-64 h-40 z-[9999]"
   >
     <div class="flex justify-between items-center container mx-auto p-6">
       <div>
@@ -31,8 +31,11 @@ console.log(dayOfTheWeek);
         />
       </div>
       <div>
-        <button class="px-4 py-[6px] rounded-lg border-2 border-neutral-50"
-          >Entre em contato</button
+        <a
+          href="https://wa.me/+5513988757841/?text=Olá, vim pelo seu site, gostaria de marcar uma consulta!"
+          target="_blank"
+          class="block px-4 py-[6px] rounded-lg border-2 border-neutral-50"
+          >Entre em contato</a
         >
       </div>
     </div>
@@ -64,9 +67,11 @@ console.log(dayOfTheWeek);
               Transforme seu sorriso e realce sua beleza natural com o melhor
               cuidado de Santos
             </p>
-            <button
-              class="mt-6 px-4 py-2 rounded-lg border-2 border-neutral-900 text-xl w-full lg:w-fit"
-              >Agende já</button
+            <a
+              href="https://wa.me/+5513988757841/?text=Olá, vim pelo seu site, gostaria de marcar uma consulta!"
+              target="_blank"
+              class="block mt-6 px-4 py-2 rounded-lg border-2 border-neutral-900 text-xl w-full lg:w-fit"
+              >Agende já</a
             >
           </div>
           <div
@@ -86,8 +91,12 @@ console.log(dayOfTheWeek);
         </div>
       </div>
     </section>
-    <section class="relative bg-neutral-900 text-neutral-50">
-      <Room title="Sala Harmonização" picturesArray={harmonizeImages} />
+    <section class="bg-neutral-900 text-neutral-50">
+      <Room
+        title="Sala Harmonização"
+        prefix={"harmonize"}
+        picturesArray={harmonizeImages}
+      />
     </section>
     <section
       class="flex flex-none flex-shrink-0 relative break-word items-center bg-black text-white"
@@ -109,14 +118,20 @@ console.log(dayOfTheWeek);
             ))
           }
         </div>
-        <button
-          class="w-full lg:w-fit px-4 py-3 rounded-lg border-2 border-neutral-50 text-neutral-50 text-xl"
-          >Agende já</button
+        <a
+          href="https://wa.me/+5513988757841/?text=Olá, vim pelo seu site, gostaria de marcar uma consulta!"
+          target="_blank"
+          class="block w-full lg:w-fit px-4 py-3 rounded-lg border-2 border-neutral-50 text-neutral-50 text-xl"
+          >Agende já</a
         >
       </div>
     </section>
-    <section class="relative my-20">
-      <Room title="Recepção" picturesArray={receptionImages} />
+    <section class="my-20">
+      <Room
+        title="Recepção"
+        prefix={"reception"}
+        picturesArray={receptionImages}
+      />
     </section>
     <section class="relative">
       <div class="relative flex break-word flex-col lg:flex-row min-h-screen">
@@ -146,9 +161,11 @@ console.log(dayOfTheWeek);
                     Instituto Fabíula Martins para todas as suas necessidades
                     odontológicas.
                   </p>
-                  <button
-                    class="w-full lg:w-fit mt-6 px-4 py-2 rounded-lg border-2 border-white text-xl"
-                    >Agende já</button
+                  <a
+                    href="https://wa.me/+5513988757841/?text=Olá, vim pelo seu site, gostaria de marcar uma consulta!"
+                    target="_blank"
+                    class="block w-full lg:w-fit mt-6 px-4 py-2 rounded-lg border-2 border-white text-xl"
+                    >Agende já</a
                   >
                 </div>
               </div>
@@ -170,8 +187,12 @@ console.log(dayOfTheWeek);
         </div>
       </div>
     </section>
-    <section class="relative bg-neutral-900 text-neutral-50 pt-2">
-      <Room title="Sala odontológica" picturesArray={receptionImages} />
+    <section class="bg-neutral-900 text-neutral-50 pt-2">
+      <Room
+        title="Sala odontológica"
+        prefix={"odonto"}
+        picturesArray={receptionImages}
+      />
     </section>
     <section class="bg-neutral-800">
       <div
@@ -194,8 +215,8 @@ console.log(dayOfTheWeek);
         </div>
       </div>
     </section>
-    <section class="relative mt-12">
-      <Room picturesArray={receptionImages} />
+    <section class="mt-12">
+      <Room picturesArray={receptionImages} prefix={"pictures"} />
     </section>
     <section class="my-12">
       <div class="bg-neutral-800 pt-12 pb-16">
@@ -210,7 +231,11 @@ console.log(dayOfTheWeek);
       </h2>
       <div>
         <div class="bg-white text-black w-full pb-20">
-          <GalleryCarousel client:load />
+          <GalleryCarousel
+            images={beforeAfterImages}
+            prefix={"beforeafter"}
+            client:load
+          />
         </div>
       </div>
     </section>
@@ -254,15 +279,17 @@ console.log(dayOfTheWeek);
             Conheça nosso Instituto e cuide da sua saúde bucal com os melhores
             profissionais.
           </p>
-          <button
-            class="w-full lg:w-fit mt-6 px-4 py-2 rounded-lg border-2 border-white text-xl"
-            >Agende</button
+          <a
+            href="https://wa.me/+5513988757841/?text=Olá, vim pelo seu site, gostaria de marcar uma consulta!"
+            target="_blank"
+            class="block w-full lg:w-fit mt-6 px-4 py-2 rounded-lg border-2 border-white text-xl"
+            >Agende</a
           >
         </div>
       </div>
     </section>
     <section>
-      <Map client:only />
+      <Map client:only="react" />
     </section>
     <section class="relative bg-stone-100">
       <div
@@ -404,9 +431,11 @@ console.log(dayOfTheWeek);
             que é receber um tratamento odontológico e de harmonização facial
             verdadeiramente excepcional.
           </div>
-          <button
-            class="mt-6 px-4 py-2 rounded-lg border-2 border-neutral-900 text-xl w-full lg:w-fit"
-            >Agende já</button
+          <a
+            href="https://wa.me/+5513988757841/?text=Olá, vim pelo seu site, gostaria de marcar uma consulta!"
+            target="_blank"
+            class="block mt-6 px-4 py-2 rounded-lg border-2 border-neutral-900 text-xl w-full lg:w-fit"
+            >Agende já</a
           >
         </div>
       </div>
@@ -429,21 +458,21 @@ console.log(dayOfTheWeek);
             <div class="flex items-center gap-x-4 gap-y-2 flex-wrap">
               <a
                 class="flex justify-center items-center"
-                href="https://facebook.com"
+                href="https://www.facebook.com/drafabiulaodontologia?mibextid=kFxxJD"
                 target="_blank"
               >
                 <img src="facebook.svg" />
               </a>
               <a
                 class="flex justify-center items-center"
-                href="https://instagram.com"
+                href="https://www.instagram.com/institutofabiulamartins?igsh=MTlqbmNzbjNuaTVrdg=="
                 target="_blank"
               >
                 <img src="instagram.svg" />
               </a>
               <a
                 class="flex justify-center items-center"
-                href="https://whatsapp.com"
+                href="https://wa.me/+5513988757841/?text=Olá, vim pelo seu site, gostaria de marcar uma consulta!"
                 target="_blank"
               >
                 <img src="whatsapp.svg" />
