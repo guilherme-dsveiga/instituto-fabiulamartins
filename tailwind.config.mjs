@@ -7,7 +7,12 @@ export default {
         mulish: ["Mulish", "sans-serif"],
         merriweather: ["Merriweather", "serif"],
       },
+      colors: {
+        gold: "#836322",
+        navy: "#1c3144",
+      },
     },
   },
   plugins: [],
+  important: true,
 };

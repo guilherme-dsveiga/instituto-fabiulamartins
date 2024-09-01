@@ -6,7 +6,9 @@ const { title, picturesArray, variant = "dark" } = Astro.props;
 
 {
   title && (
-    <h2 class="text-5xl text-center font-merriweather mb-6 pt-2">{title}</h2>
+    <h2 class="lg:text-5xl text-3xl text-center font-merriweather mb-6 pt-2">
+      {title}
+    </h2>
   )
 }
 <div class="grid grid-cols-1 lg:grid-cols-3">

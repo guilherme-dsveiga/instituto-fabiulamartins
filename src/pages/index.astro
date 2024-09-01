@@ -3,7 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import Carousel from "../components/carousel.astro";
 import IconCard from "../components/icon-card.astro";
 import {
-  slides,
   iconCards,
   introParagraphs,
   harmonizeImages,
@@ -11,16 +10,25 @@ import {
 } from "../data/index.astro";
 import ImageCard from "../components/image-card.astro";
 import Room from "../components/room.astro";
-import GaleryCarousel from "../components/galery-carousel.astro";
+import "../styles/index.css";
+import GalleryCarousel from "../components/gallery-carousel.jsx";
+import TestimonialCarousel from "../components/testimonial-carousel.jsx";
+import Map from "../components/map";
+
+const dayOfTheWeek = new Date().getDay();
+console.log(dayOfTheWeek);
 ---
 
 <Layout title="Instituto Fabiula Martins">
   <header
-    class="bg-neutral-900 text-neutral-50 fixed top-0 left-0 right-0 h-64 z-50"
+    class="bg-neutral-900 text-neutral-50 fixed top-0 left-0 right-0 lg:h-64 h-40 z-50"
   >
     <div class="flex justify-between items-center container mx-auto p-6">
       <div>
-        <img class="h-[200px] w-[200px] object-contain" src="assets/logo.png" />
+        <img
+          class="lg:h-[200px] lg:w-[200px] w-40 h-40 object-contain"
+          src="assets/logo.png"
+        />
       </div>
       <div>
         <button class="px-4 py-[6px] rounded-lg border-2 border-neutral-50"
@@ -29,7 +37,7 @@ import GaleryCarousel from "../components/galery-carousel.astro";
       </div>
     </div>
   </header>
-  <main class="mt-64">
+  <main class="lg:mt-64 mt-40 overflow-x-hidden">
     <section class="relative">
       <div class="absolute inset-0 z-10 pointer-events-none bg-white">
         <img
@@ -57,7 +65,7 @@ import GaleryCarousel from "../components/galery-carousel.astro";
               cuidado de Santos
             </p>
             <button
-              class="mt-6 px-4 py-2 rounded-lg border-2 border-neutral-900 text-xl"
+              class="mt-6 px-4 py-2 rounded-lg border-2 border-neutral-900 text-xl w-full lg:w-fit"
               >Agende já</button
             >
           </div>
@@ -82,7 +90,7 @@ import GaleryCarousel from "../components/galery-carousel.astro";
       <Room title="Sala Harmonização" picturesArray={harmonizeImages} />
     </section>
     <section
-      class="flex flex-none flex-shrink-0 relative break-word items-center bg-neutral-700 text-white"
+      class="flex flex-none flex-shrink-0 relative break-word items-center bg-black text-white"
     >
       <div class="absolute inset-0 z-10 pointer-events-none">
         <img
@@ -92,13 +100,17 @@ import GaleryCarousel from "../components/galery-carousel.astro";
         />
       </div>
       <div
-        class="relative z-10 container mx-auto pt-16 lg:pt-32 pb-16 lg:pb-32 text-lg"
+        class="relative z-10 px-6 lg:px-0 container mx-auto pt-16 lg:pt-32 pb-16 lg:pb-32 text-lg"
       >
         <div class="max-w-5xl text-left ml-0 mr-auto">
-          {introParagraphs.map((paragraph) => <p class="mb-5">{paragraph}</p>)}
+          {
+            introParagraphs.map((paragraph) => (
+              <p class="lg:text-base mb-5">{paragraph}</p>
+            ))
+          }
         </div>
         <button
-          class="px-4 py-3 rounded-lg border-2 border-neutral-50 text-neutral-50 text-xl"
+          class="w-full lg:w-fit px-4 py-3 rounded-lg border-2 border-neutral-50 text-neutral-50 text-xl"
           >Agende já</button
         >
       </div>
@@ -122,11 +134,11 @@ import GaleryCarousel from "../components/galery-carousel.astro";
                 <div>
                   <h2
                     style="white-space:pre-line"
-                    class="text-5xl font-merriweather mb-7"
+                    class="lg:text-5xl text-3xl font-merriweather mb-7"
                   >
                     Cuide da sua saúde bucal no Instituto Fabíula Martins
                   </h2>
-                  <p class="text-lg mb-2">
+                  <p class="lg:text-lg text-base mb-2">
                     Localizado em Santos, SP, o Instituto Fabíula Martins é
                     especializado em serviços odontológicos de qualidade. Nossa
                     equipe de profissionais experientes está pronta para cuidar
@@ -135,7 +147,7 @@ import GaleryCarousel from "../components/galery-carousel.astro";
                     odontológicas.
                   </p>
                   <button
-                    class="mt-6 px-4 py-2 rounded-lg border-2 border-white text-xl"
+                    class="w-full lg:w-fit mt-6 px-4 py-2 rounded-lg border-2 border-white text-xl"
                     >Agende já</button
                   >
                 </div>
@@ -150,6 +162,7 @@ import GaleryCarousel from "../components/galery-carousel.astro";
             <div class="absolute inset-0 z-10 pointer-events-none">
               <img
                 class="transition-all duration-300 w-full h-full object-cover"
+                style="object-position: 50% 25%;"
                 src="/assets/person-smile.webp"
               />
             </div>
@@ -162,17 +175,19 @@ import GaleryCarousel from "../components/galery-carousel.astro";
     </section>
     <section class="bg-neutral-800">
       <div
-        class="relative z-10 container mx-auto pt-16 lg:pt-32 pb-8 lg:pb-12 text-white"
+        class="relative z-10 container mx-auto px-6 lg:px-0 pt-16 lg:pt-32 pb-8 lg:pb-12 text-white"
       >
-        <h2 class="font-merriweather text-5xl mb-6">Meus serviços</h2>
+        <h2 class="font-merriweather lg:text-5xl text-3xl mb-6">
+          Meus serviços
+        </h2>
         <div class="flex flex-col gap-10">
           <div
-            class="flex flex-col lg:flex-row relative justify-center lg:justify-start gap-12"
+            class="flex flex-col lg:flex-row relative items-stretch lg:justify-center justify-start gap-12"
           >
             {iconCards.slice(0, 4).map((card) => <IconCard {...card} />)}
           </div>
           <div
-            class="flex flex-col lg:flex-row relative justify-center lg:justify-start gap-10"
+            class="flex flex-col lg:flex-row relative items-stretch lg:justify-center justify-start gap-10"
           >
             {iconCards.slice(4, 8).map((card) => <IconCard {...card} />)}
           </div>
@@ -182,18 +197,261 @@ import GaleryCarousel from "../components/galery-carousel.astro";
     <section class="relative mt-12">
       <Room picturesArray={receptionImages} />
     </section>
-    <section class="mt-12 mb-20">
+    <section class="my-12">
       <div class="bg-neutral-800 pt-12 pb-16">
         <div class="w-full bg-neutral-800 container mx-auto">
-          <Carousel slides={slides} />
+          <TestimonialCarousel client:load />
         </div>
       </div>
     </section>
-    <section class="relative my-20">
-      Antes e Depois
+    <section class="relative mb-20">
+      <h2 class="lg:text-5xl text-3xl text-center font-merriweather mb-6 pt-2">
+        Antes e depois
+      </h2>
       <div>
-        <GaleryCarousel />
+        <div class="bg-white text-black w-full pb-20">
+          <GalleryCarousel client:load />
+        </div>
       </div>
     </section>
-  </main>
-</Layout>
+    <section
+      class="flex flex-col flex-none flex-shrink-0 relative break-word items-center bg-neutral-900 text-white"
+    >
+      <div
+        class="relative z-10 container flex flex-col h-full mx-auto px-5 md:px-6 lg:px-20 justify-center pt-12 lg:pt-20 pb-16 lg:pb-32"
+      >
+        <div class="max-w-5xl text-left ml-0 mr-auto">
+          <h2
+            style="white-space:pre-line"
+            class="font-merriweather lg:text-5xl text-3xl lg:mb-7 mb-4"
+          >
+            Sobre nós
+          </h2>
+          <p class="lg:text-lg text-base lg:mb-7 mb-4">
+            O Instituto Fabíula Martins é uma clínica odontológica dedicada a
+            fornecer cuidados de qualidade e personalizados para todos os
+            pacientes. Localizada em Santos, SP, nossa equipe de profissionais
+            altamente qualificados está comprometida em oferecer um atendimento
+            excepcional e soluções eficazes para as necessidades odontológicas
+            de cada indivíduo.
+          </p>
+          <p class="lg:text-lg text-base">
+            Nosso compromisso é garantir que cada visita seja confortável e
+            produtiva, visando sempre a saúde bucal e o bem-estar geral de
+            nossos pacientes. Estamos empenhados em proporcionar um ambiente
+            acolhedor e seguro, onde a confiança e a satisfação de quem nos
+            procura são prioridades absolutas.
+          </p>
+        </div>
+      </div>
+      <div
+        class="relative z-10 container flex flex-col h-full mx-auto px-5 md:px-6 lg:px-20 justify-center pt-12 lg:pt-20 pb-16 lg:pb-32"
+      >
+        <div
+          class="flex flex-col gap-4 max-w-3xl items-center mx-auto text-center"
+        >
+          <p class="lg:text-lg text-base lg:mb-7 mb-4">
+            Conheça nosso Instituto e cuide da sua saúde bucal com os melhores
+            profissionais.
+          </p>
+          <button
+            class="w-full lg:w-fit mt-6 px-4 py-2 rounded-lg border-2 border-white text-xl"
+            >Agende</button
+          >
+        </div>
+      </div>
+    </section>
+    <section>
+      <Map client:only />
+    </section>
+    <section class="relative bg-stone-100">
+      <div
+        class="relative z-10 container flex flex-col items-center h-full mx-auto px-5 md:px-6 lg:px-20 justify-center pt-12 lg:pt-20 pb-16 lg:pb-32"
+      >
+        <div
+          class="border-8 w-[300px] border-navy bg-navy text-gold border-opacity-65 bg-opacity-25 p-[10px]"
+        >
+          <h3 class="font-extrabold text-xl text-center p-4">
+            Horário Comercial
+          </h3>
+          <div class="flex flex-col gap-4">
+            <div class="flex justify-between">
+              <div class="flex gap-1 items-center">
+                <p>Segunda-feira</p>
+                <div
+                  style={dayOfTheWeek === 1
+                    ? "display: flex!important"
+                    : "display: none!important"}
+                  class="bg-navy px-[6px] py-[2px] w-fit text-[10px] font-bold text-white justify-center items-center rounded-full"
+                  data-day="1"
+                >
+                  Hoje
+                </div>
+              </div>
+              <p>08:00 - 19:00</p>
+            </div>
+            <div class="flex justify-between">
+              <div class="flex gap-1 items-center">
+                <p>Terça-feira</p>
+                <div
+                  style={dayOfTheWeek === 2
+                    ? "display: flex!important"
+                    : "display: none!important"}
+                  class="bg-navy px-[6px] py-[2px] w-fit text-[10px] font-bold text-white justify-center items-center rounded-full"
+                  data-day="1"
+                >
+                  Hoje
+                </div>
+              </div>
+              <p>08:00 - 19:00</p>
+            </div>
+            <div class="flex justify-between">
+              <div class="flex gap-1 items-center">
+                <p>Quarta-feira</p>
+                <div
+                  style={dayOfTheWeek === 3
+                    ? "display: flex!important"
+                    : "display: none!important"}
+                  class="bg-navy px-[6px] py-[2px] w-fit text-[10px] font-bold text-white justify-center items-center rounded-full"
+                  data-day="1"
+                >
+                  Hoje
+                </div>
+              </div>
+              <p>07:00 - 19:00</p>
+            </div>
+            <div class="flex justify-between">
+              <div class="flex gap-1 items-center">
+                <p>Quinta-feira</p>
+                <div
+                  style={dayOfTheWeek === 4
+                    ? "display: flex!important"
+                    : "display: none!important"}
+                  class="bg-navy px-[6px] py-[2px] w-fit text-[10px] font-bold text-white justify-center items-center rounded-full"
+                  data-day="1"
+                >
+                  Hoje
+                </div>
+              </div>
+              <p>08:00 - 19:00</p>
+            </div>
+            <div class="flex justify-between">
+              <div class="flex gap-1 items-center">
+                <p>Sexta-feira</p>
+                <div
+                  style={dayOfTheWeek === 5
+                    ? "display: flex!important"
+                    : "display: none!important"}
+                  class="bg-navy px-[6px] py-[2px] w-fit text-[10px] font-bold text-white justify-center items-center rounded-full"
+                  data-day="1"
+                >
+                  Hoje
+                </div>
+              </div>
+              <p>08:00 - 19:00</p>
+            </div>
+            <div class="flex justify-between">
+              <div class="flex gap-1 items-center">
+                <p>Sábado</p>
+                <div
+                  style={dayOfTheWeek === 6
+                    ? "display: flex!important"
+                    : "display: none!important"}
+                  class="bg-navy px-[6px] py-[2px] w-fit text-[10px] font-bold text-white justify-center items-center rounded-full"
+                  data-day="1"
+                >
+                  Hoje
+                </div>
+              </div>
+              <p>08:00 - 14:00</p>
+            </div>
+            <div class="flex justify-between">
+              <div class="flex gap-1 items-center">
+                <p>Domingo</p>
+                <div
+                  style={dayOfTheWeek === 0
+                    ? "display: flex!important"
+                    : "display: none!important"}
+                  class="bg-navy px-[6px] py-[2px] w-fit text-[10px] font-bold text-white justify-center items-center rounded-full"
+                  data-day="1"
+                >
+                  Hoje
+                </div>
+              </div>
+              <p>Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div
+        class="relative z-10 container mx-auto pt-16 lg:pt-32 pb-16 lg:pb-32 px-6 lg:px-0"
+      >
+        <div class="flex flex-col items-center">
+          <div
+            class="lg:text-5xl text-3xl max-w-5xl text-center mx-auto font-merriweather lg:mb-7 mb-4"
+          >
+            Atendimento Humanizado
+          </div>
+          <div class="lg:text-lg text-base">
+            No Instituto Fabíula Martins, onde cada sorriso é único e cada
+            paciente recebe um atendimento personalizado e humano. Acreditamos
+            que cada jornada de tratamento é única, adaptada às necessidades e
+            desejos individuais de cada pessoa. Nossa equipe dedicada está aqui
+            para ouvir, orientar e garantir que você se sinta valorizado e
+            cuidado em cada etapa do processo. Venha nos conhecer e descubra o
+            que é receber um tratamento odontológico e de harmonização facial
+            verdadeiramente excepcional.
+          </div>
+          <button
+            class="mt-6 px-4 py-2 rounded-lg border-2 border-neutral-900 text-xl w-full lg:w-fit"
+            >Agende já</button
+          >
+        </div>
+      </div>
+    </section>
+    <section class="bg-neutral-800">
+      <div
+        class="relative z-10 container mx-auto pt-12 lg:pt-20 pb-12 lg:pb-20 text-white px-6 lg:px-0"
+      >
+        <div class="flex flex-col items-start gap-12 text-left">
+          <div class="flex flex-col items-start justify-start gap-6">
+            <img
+              class="lg:h-[200px] lg:w-[200px] w-40 h-40 object-contain"
+              src="assets/logo.png"
+            />
+            <p class="lg:text-lg text-base font-mulish w-fit">
+              Av ana costa 146, sala 1908
+            </p>
+          </div>
+          <div class="flex flex-col items-start gap-12 lg:gap-14">
+            <div class="flex items-center gap-x-4 gap-y-2 flex-wrap">
+              <a
+                class="flex justify-center items-center"
+                href="https://facebook.com"
+                target="_blank"
+              >
+                <img src="facebook.svg" />
+              </a>
+              <a
+                class="flex justify-center items-center"
+                href="https://instagram.com"
+                target="_blank"
+              >
+                <img src="instagram.svg" />
+              </a>
+              <a
+                class="flex justify-center items-center"
+                href="https://whatsapp.com"
+                target="_blank"
+              >
+                <img src="whatsapp.svg" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main></Layout
+>
